@@ -21,3 +21,11 @@ Route::get('users', function()
 
     return View::make('users')->with('users', $users);
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('/services/{service_id}/register','Services\ServiceController@index');
+
+Route::post('/services/{id}/register_done', 'Services\ServiceController@register_to_service');
