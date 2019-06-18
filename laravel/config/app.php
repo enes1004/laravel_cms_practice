@@ -202,6 +202,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Service' => App\Service::class,
+        'ProductService1' => App\ProductService1::class,
+        'PurchaseService1' => App\PurchaseService1::class,
+
     ],
 
 ];

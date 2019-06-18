@@ -28,4 +28,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/services/{service_id}/register','Services\ServiceController@index');
 
-Route::post('/services/{id}/register_done', 'Services\ServiceController@register_to_service');
+Route::match(['get', 'post'],'/services/{id}/register_done', 'Services\ServiceController@register_to_service');
+
+Route::post('/products/{service_id}/{id}/register_done', 'Services\ProductController@register_to_product');

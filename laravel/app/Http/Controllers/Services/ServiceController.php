@@ -19,12 +19,10 @@ class ServiceController extends Controller
   }
   public function register_to_service(Request $request)
   {
-    if(!$request->user()->is_registered_to('service',$request->id)){
+    $already_registered=$request->user()->is_registered_to('service',['service_id'=>$request->id]);
+    if(!$already_registered){
     $request->user()->register_service($request->id);
-    return view('services.register_done',['service_id'=>$request->id]);
   }
-    else{
-      return(redirect("/services/".$request->id."/register"));
-    }
+    return view('services.register_done',['service_id'=>$request->id, 'already_registered'=>$already_registered]);
   }
 }

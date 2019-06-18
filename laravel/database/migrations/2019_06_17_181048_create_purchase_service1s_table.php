@@ -16,7 +16,7 @@ class CreatePurchaseService1sTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->integer('product_service1_id')->unsigned();
+            $table->integer('product_id')->unsigned();
             $table->integer('service_id')->unsigned();
             $table->integer('plan_id')->unsigned();
             $table->string('status');

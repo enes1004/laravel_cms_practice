@@ -62,15 +62,32 @@ class User extends Authenticatable
         return $this->belongsToMany(Service::class,"user_has_services");
     }
 
+    public function purchases($service_id){
+      $service=$this->services()->where('service_id',$service_id)->first();
+      return $this->belongsToMany($service->product_class(),$service->purchase_db(),'user_id','product_id');
+    }
+
     public function register_service($service_id){
       $this->services()->attach(Service::where('id',$service_id)->first());
       $this->save();
     }
+    public function register_product($ids){
+      $service=$this->services()->where('service_id',$ids['service_id'])->first();
+      $purchase_conn=$this->purchases($ids['service_id']);
+      $product_class=$service->product_class();
+      $product=$product_class::where('id',$ids['product_id'])->first();
+      $purchase_conn->attach($product,['service_id'=>$product->service_id,'plan_id'=>$product->plan_id]);
+      $this->save();
+    }
 
-    public function is_registered_to($type,$id){
+
+    public function is_registered_to($type,$ids){
       switch ($type) {
         case 'service':
-          return null !== $this->services()->where("service_id",$id)->first();
+          return null !== $this->services()->where("service_id",$ids['service_id'])->first();
+          break;
+        case 'product':
+          return null !== $this->purchases($ids['service_id'])->where("product_id",$ids['product_id'])->first();
           break;
 
         default:
