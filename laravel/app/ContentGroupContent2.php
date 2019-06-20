@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ContentGroup1 extends Model
+class ContentGroupContent2 extends Model
 {
     //
 }

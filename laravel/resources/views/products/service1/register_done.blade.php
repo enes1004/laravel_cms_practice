@@ -9,7 +9,8 @@
 
                 <div class="panel-body">
                     Registered to {{ ProductService1::where('id',$product_id)->first()->name }}
-                </div>
+                    @extends('products.service1.linked_product')
+              </div>
             </div>
         </div>
     </div>

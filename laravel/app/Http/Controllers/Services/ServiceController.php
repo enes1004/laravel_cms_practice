@@ -23,6 +23,6 @@ class ServiceController extends Controller
     if(!$already_registered){
     $request->user()->register_service($request->id);
   }
-    return view('services.register_done',['service_id'=>$request->id, 'already_registered'=>$already_registered]);
+    return view('services.register_done',['service_id'=>$request->id,'already_registered_product'=>false, 'already_registered'=>$already_registered]);
   }
 }

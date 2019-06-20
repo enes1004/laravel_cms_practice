@@ -204,7 +204,9 @@ return [
         'Service' => App\Service::class,
         'ProductService1' => App\ProductService1::class,
         'PurchaseService1' => App\PurchaseService1::class,
-
+        'ContentInfo'=> App\ContentInfo::class,
+        'ContentGroupContent1' => App\ContentGroupContent1::class,
+        'ContentGroupContent2' => App\ContentGroupContent2::class,
     ],
 
 ];

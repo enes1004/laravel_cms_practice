@@ -20,6 +20,10 @@
                     <input type="hidden" name="service_id" value="{{ $service_id }}" />
                     <input type="hidden" name="product_id" value="{{ $product->id }}" />
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <?php $product_id=$product->id; ?>
+                    @include('products.'.mb_strtolower(Service::where('id',$service_id)->first()->name).'.linked_product')
+                    <br>
                     <button type="submit">Register</button>
                     </form>
                     @endforeach
