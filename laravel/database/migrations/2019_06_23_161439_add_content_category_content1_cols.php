@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentCategoryContent1sTable extends Migration
+class AddContentCategoryContent1Cols extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateContentCategoryContent1sTable extends Migration
     public function up()
     {
         Schema::create('content_category_content1s', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+          $table->increments('id');
+          $table->timestamps();
+            $table->string('name');
+            $table->string('description');
         });
     }
 
@@ -25,6 +27,8 @@ class CreateContentCategoryContent1sTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content_category_content1s');
+        Schema::table('content_category_content1s', function (Blueprint $table) {
+          Schema::drop('content_category_content1s');
+        });
     }
 }

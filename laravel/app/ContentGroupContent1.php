@@ -15,5 +15,8 @@ class ContentGroupContent1 extends Model
     $rel_table="content_group_content1_product_".mb_strtolower($service->name);
       return Schema::hasTable($rel_table)?$this->belongsToMany($service->product_class(),$rel_table,"content_group_id","product_id"):null;
   }
+  public function contents(){
+    return $this->hasMany('App\Content1','content_group_id','id');
+  }
 
 }
