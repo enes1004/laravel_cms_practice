@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function purchases($service_id){
       $service=$this->services()->where('service_id',$service_id)->first();
-      return $this->belongsToMany($service->product_class(),$service->purchase_db(),'user_id','product_id');
+      return $this->belongsToMany($service->product_class(),$service->purchase_db(),'user_id','product_id')->withPivot('status')->withTimestamps();
     }
 
     public function register_service($service_id){
@@ -79,7 +79,14 @@ class User extends Authenticatable
       $purchase_conn->attach($product,['service_id'=>$product->service_id,'plan_id'=>$product->plan_id]);
       $this->save();
     }
-
+    public function check_and_do_purchase_updates($service_id){
+      $service=$this->services()->where('service_id',$service_id)->first();
+      $purchase_class=$service->purchase_class();
+      $purchases=$purchase_class::where('user_id',$this->id)->get();
+      foreach ($purchases as $purchase) {
+        $purchase->check_and_do_updates();
+      }
+    }
 
     public function is_registered_to($type,$ids){
       switch ($type) {

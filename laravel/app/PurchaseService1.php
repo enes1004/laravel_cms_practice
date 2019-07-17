@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseService1 extends Pivot
+class PurchaseService1 extends Model
 {
   public function user()
   {
@@ -13,5 +13,9 @@ class PurchaseService1 extends Pivot
   public function product()
   {
       return $this->belongsTo(ProductService1::class);
+  }
+  public function check_and_do_updates(){
+    $updates=$this->product()->first()->plan()->first()->update_purchase_logic($this);
+    var_dump($updates);
   }
 }

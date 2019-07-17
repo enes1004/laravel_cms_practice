@@ -20,5 +20,8 @@ class Service extends Model
   public function purchase_db(){
     return 'purchase_'.mb_strtolower($this->name)."s";
   }
+  public function purchase_class(){
+    return 'App\Purchase'.$this->name;
+  }
 
 }

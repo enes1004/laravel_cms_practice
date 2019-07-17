@@ -27,6 +27,14 @@
                     </form>
                     <?php endforeach; ?>
                 </div>
+                <div>
+                  Your purchase status for this service:<br>
+                  <ul>
+                  <?php foreach(Auth::user()->purchases($service_id)->get() as $purch ): ?>
+                  <li><?php echo e($purch->name.": ".$purch->pivot->status); ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                </div>
             </div>
         </div>
     </div>
