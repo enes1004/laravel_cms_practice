@@ -12,7 +12,10 @@ class CreateContentCategoryContent1sTable extends Migration
      */
     public function up()
     {
-        Schema::create('content1s', function (Blueprint $table) {
+        Schema::create('content_category_content1s', function (Blueprint $table) {
+          $table->increments('id');
+          $table->timestamps();
+
         });
     }
 
@@ -23,6 +26,6 @@ class CreateContentCategoryContent1sTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content1s');
+        Schema::drop('content_category_content1s');
     }
 }

@@ -12,9 +12,7 @@ class AddContentCategoryContent1Cols extends Migration
      */
     public function up()
     {
-        Schema::create('content_category_content1s', function (Blueprint $table) {
-          $table->increments('id');
-          $table->timestamps();
+        Schema::table('content_category_content1s', function (Blueprint $table) {
             $table->string('name');
             $table->string('description');
         });
@@ -28,7 +26,8 @@ class AddContentCategoryContent1Cols extends Migration
     public function down()
     {
         Schema::table('content_category_content1s', function (Blueprint $table) {
-          Schema::drop('content_category_content1s');
-        });
+          $table->dropColumns('name');
+          $table->dropColumns('description');
+      });
     }
 }

@@ -12,9 +12,7 @@ class AddContent1Cols extends Migration
      */
     public function up()
     {
-        Schema::create('content1s', function (Blueprint $table) {
-          $table->increments('id');
-          $table->timestamps();
+        Schema::table('content1s', function (Blueprint $table) {
             $table->string('title');
             $table->string('writer');
             $table->string('content');
@@ -30,7 +28,11 @@ class AddContent1Cols extends Migration
     public function down()
     {
         Schema::table('content1s', function (Blueprint $table) {
-          Schema::drop('content1s');
+          $table->dropColumns('title');
+          $table->dropColumns('writer');
+          $table->dropColumns('content');
+          $table->dropColumns('content_group_id');
+
         });
     }
 }

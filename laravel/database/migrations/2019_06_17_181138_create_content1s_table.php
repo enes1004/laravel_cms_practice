@@ -13,6 +13,9 @@ class CreateContent1sTable extends Migration
     public function up()
     {
         Schema::create('content1s', function (Blueprint $table) {
+          $table->increments('id');
+          $table->timestamps();
+
         });
     }
 
