@@ -12,6 +12,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+      /*
       $role_customer = new Role();
       $role_customer->name = 'customer';
       $role_customer->description = 'Customer User';
@@ -20,6 +21,6 @@ class RoleTableSeeder extends Seeder
       $role_admin->name = 'admin';
       $role_admin->description = 'Admin User';
       $role_admin->save();
-
+*/
     }
 }

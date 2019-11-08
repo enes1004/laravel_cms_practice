@@ -62,9 +62,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Service::class,"user_has_services");
     }
 
-    public function purchases($service_id){
+    public function purchases(){
+      return $this->belongsToMany(ContentGroup::class,'purchases','user_id','content_group_id')->withPivot('status')->withTimestamps();
+    }
+    public function registered_products($service_id){
       $service=$this->services()->where('service_id',$service_id)->first();
-      return $this->belongsToMany(Product::class,Purchase::class,'user_id','product_id')->withPivot('status')->withTimestamps();
+      return $this->belongsToMany(Product::class,'user_has_products');
     }
 
     public function register_service($service_id){
@@ -73,15 +76,14 @@ class User extends Authenticatable
     }
     public function register_product($ids){
       $service=$this->services()->where('service_id',$ids['service_id'])->first();
-      $purchase_conn=$this->purchases($ids['service_id']);
+      $u_has_prod_conn=$this->registered_products($ids['service_id']);
       $product=Product::where('id',$ids['product_id'])->first();
-      $purchase_conn->attach($product,['service_id'=>$product->service_id]);
+      $u_has_prod_conn->attach($product);
       $this->save();
     }
     public function check_and_do_purchase_updates($service_id){
       $service=$this->services()->where('service_id',$service_id)->first();
-      $purchase_class=$service->purchase_class();
-      $purchases=$purchase_class::where('user_id',$this->id)->get();
+      $purchases=$this->purchases()->get();
       foreach ($purchases as $purchase) {
         $purchase->check_and_do_updates();
       }
@@ -93,8 +95,11 @@ class User extends Authenticatable
           return null !== $this->services()->where("service_id",$ids['service_id'])->first();
           break;
         case 'product':
-          return null !== $this->purchases($ids['service_id'])->where("product_id",$ids['product_id'])->first();
+          return null !== $this->registered_products($ids['service_id'])->where("product_id",$ids['product_id'])->first();
           break;
+          case 'content_group':
+            return null !== $this->purchases($ids['service_id'])->where("content_group_id",$ids['content_group_id'])->first();
+            break;
 
         default:
           // code...

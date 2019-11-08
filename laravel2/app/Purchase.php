@@ -10,12 +10,12 @@ class Purchase extends Model
   {
       return $this->belongsTo(User::class);
   }
-  public function product()
+  public function content_group()
   {
-      return $this->belongsTo(Product::class);
+      return $this->belongsTo(ContentGroup::class);
   }
   public function check_and_do_updates(){
-    $updates=$this->product()->first()->plan()->first()->update_purchase_logic($this);
+    $updates=$this->content_group()->first()->product()->first()->plan()->first()->update_purchase_logic($this);
     var_dump($updates);
   }
 }

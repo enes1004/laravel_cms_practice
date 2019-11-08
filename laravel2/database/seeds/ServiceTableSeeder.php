@@ -12,10 +12,12 @@ class ServiceTableSeeder extends Seeder
      */
     public function run()
     {
+    /*
       $service=new Service();
       $service->name="Service1";
       $service->description="Example Service1";
       $service->register_url="1/register";
       $service->save();
+      */
     }
 }

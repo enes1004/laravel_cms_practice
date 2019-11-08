@@ -13,5 +13,8 @@ class ContentGroup extends Model
   public function contents(){
     return $this->hasMany(Content::class);
   }
+  public function product(){
+    return $this->belongsTo(Product::class);
+  }
 
 }
